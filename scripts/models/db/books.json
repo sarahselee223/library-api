@@ -1,0 +1,20 @@
+[{ 
+    "id": "23TplPdS",
+    "name": "To Kill a Mockingbird",
+    "borrowed": false,
+    "description": "Harper Lee's Pulitzer prize-winning masterwork of honor and injustice in the deep south—and the heroism of one man in the face of blind and violent hatred    ",
+    "authors": "Harper Lee"
+},{
+    "id": "46Juzcyx",
+    "name": "1984",
+    "borrowed": true,
+    "description": "George Orwell’s 1984 takes on new life with extraordinary relevance and renewed popularity.",
+    "authors": "George Orwell"
+},
+{
+    "id": "dBvJIh-H",
+    "name": "The Great Gatsby",
+    "borrowed": true,
+    "description": "A true classic of twentieth-century literature.",
+    "authors": "F. Scott Fitzgerald"
+}]

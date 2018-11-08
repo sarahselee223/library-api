@@ -19,13 +19,26 @@ function create (req, res, next){
 }
 
 function deleteOne (req, res, next){
-    const result = model.deleteOne(
-        req.params.id
-    )
+    const result = model.deleteOne(req.params.id)
     if(result.errors){
         return next({ status: 400, message: `Could not delete a book`, errors: result.errors })
     }
     res.status(201).json({ data: result })
 }
 
-module.exports = { getAll, create, deleteOne }
+function editOne (req, res, next){
+    const result = model.editOne(
+        req.params.id,
+        req.body.name,
+        req.body.authors,
+        req.body.description,
+        req.body.borrowed
+    )
+
+    if(result.errors){
+        return next({ status: 400, message: `Could not update a book`, errors: result.errors })
+    }
+    res.status(201).json({ data: result })
+}
+
+module.exports = { getAll, create, deleteOne, editOne }

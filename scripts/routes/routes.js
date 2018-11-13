@@ -8,6 +8,8 @@ const authorctrl = require('../controls/author_controls.js')
 router.use('/:id/authors', authorRouter)
 
 router.get('/', bookctrl.getAll)
+// TODO: complete this `getOne` route
+router.get('/:id', bookctrl.getOne)
 router.post('/', bookctrl.create)
 router.delete('/:id', bookctrl.deleteOne)
 router.put('/:id', bookctrl.editOne)

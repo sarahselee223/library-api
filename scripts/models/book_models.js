@@ -5,79 +5,82 @@ const path = require('path')
 const booksFilePath = path.join(__dirname, './db/books.json')
 
 function getAll(){
-    const books = JSON.parse(fs.readFileSync(booksFilePath))
+    const { books } = readData()
     return books
 }
 
 function create (name, authors, description, borrowed){
-    const books = JSON.parse(fs.readFileSync(booksFilePath))
-    const errors = []
-    let response
+    const { books } = readData() 
 
     if (!name) {
-        errors.push('name is required')
-        response = {errors}
+        return error('name is required')
+     
     } else if (name.length > 30){
-        errors.push('name cannot be longer than 30 letters')
-        response = {errors}
-    } else if (borrowed === undefined){
-        errors.push('true/false value is required')
-        response = {errors}
-    } else if (typeof borrowed !== 'boolean'){
-        errors.push('true/false value is required')
-        response = {errors}
-    } else {
-        const book = {id: shortid.generate(), name, borrowed, description, authors}
-        books.push(book)
-        response = books
-    } 
-    fs.writeFileSync(booksFilePath, JSON.stringify(books, null, 4))
-    return response
+        return error('name cannot be longer than 30 letters')
+   
+    } else if (borrowed === undefined || typeof borrowed !== 'boolean'){
+        return error('true/false value is required')
+    
+    } else if (typeof authors !== "array"){
+        return error('author has to be array')
+    }
+
+    const book = {id: shortid.generate(), name, borrowed, description, authors}
+    books.push(book)
+
+    writeData(books)
+    return book
 }
+
 function deleteOne (id){
-    const books = JSON.parse(fs.readFileSync(booksFilePath))
-    const errors = []
-    let response
+    const { books } = readData() 
+
     const bookIndex = books.findIndex(book => {return book.id === id})
+    
     if (bookIndex === -1) {
-        errors.push('no matching id found')
-        response = { errors }
-    } else {
-        books.splice(bookIndex, 1)
-        response = books
+        return error('no matching id found')
     }
-    fs.writeFileSync(booksFilePath, JSON.stringify(books, null, 4))
-    return response
+
+    books.splice(bookIndex, 1)
+    
+    writeData(books)
+    return books
 }
+
 function editOne (id, name, authors, description, borrowed){
-    const books = JSON.parse(fs.readFileSync(booksFilePath))
-    const errors = []
-    let response
-    const bookIndex = books.findIndex(book => {return book.id === id})
-    const book = books[bookIndex]
-    if (bookIndex === -1) {
-        errors.push('no matching id found')
-        response = { errors }
-    } else {
-        if (name && book.name) {
-            book.name = name
-            response = book
-        } else if (authors && book.authors) {
-            book.authors = authors
-            response = book
-        } else if (description && book.description) {
-            book.description = description
-            response = book
-        } else if (borrowed === true || borrowed === false){
-            book.borrowed = borrowed
-            response = book
-        } else {
-            errors.push('no matching key found')
-            response = { errors }
-        }
-    }
-    fs.writeFileSync(booksFilePath, JSON.stringify(books, null, 4))
-    return response
+    const { books } = readData() 
+   
+    const book = books.find(book => {return book.id === id})
+    
+    if (!book) {
+        return error('no matching id found')
+    } 
+    if (name) {
+        book.name = name
+    } 
+    if (authors) {
+        book.authors = authors
+    } 
+    if (description) {
+        book.description = description
+    } 
+    if (borrowed === true || borrowed === false){
+        book.borrowed = borrowed
+    } 
+    
+    writeData(books)
+    return book
+}
+
+function error(msg) {
+    return { errors: msg }
+}
+
+function readData(){
+    return {books: JSON.parse(fs.readFileSync(booksFilePath))}
+}
+function writeData(books){
+    return fs.writeFileSync(booksFilePath, JSON.stringify(books, null, 4))
 }
 
 module.exports = { getAll, create, deleteOne, editOne }

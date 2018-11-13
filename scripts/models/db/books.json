@@ -6,7 +6,8 @@
         "description": "Harper Lee's Pulitzer prize-winning masterwork of honor and injustice in the deep south—and the heroism of one man in the face of blind and violent hatred    ",
         "authors": [
             "9I_3UkgOu",
-            "e7mwjWknE"
+            "PxEUmyvcs",
+            "OF08DcW81"
         ]
     },
     {
@@ -15,8 +16,7 @@
         "borrowed": true,
         "description": "George Orwell’s 1984 takes on new life with extraordinary relevance and renewed popularity.",
         "authors": [
-            "9I_3UkgOu",
-            "1jQpyURE5"
+            "9I_3UkgOu"
         ]
     },
     {
@@ -25,6 +25,23 @@
         "borrowed": true,
         "description": "A true classic of twentieth-century literature.",
         "authors": [
+            "PxEUmyvcs"
+        ]
+    },
+    {
+        "id": "qDUXTZBLk",
+        "name": "A",
+        "borrowed": true,
+        "description": "B",
+        "authors": "C"
+    },
+    {
+        "id": "YAJnUifPY",
+        "name": "K",
+        "borrowed": false,
+        "description": "D",
+        "authors": [
+            "9I_3UkgOu",
             "PxEUmyvcs"
         ]
     }

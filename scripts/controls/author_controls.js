@@ -3,7 +3,7 @@ const model = require('../models/authors_models.js')
 function getAll (req, res, next){
     const result = model.getAll(req.params.id)
     if(result.errors){
-        return next({ status: 400, message: `Could not delete a book`, errors: result.errors })
+        return next({ status: 400, message: `Could not get authors`, errors: result.errors })
     }
     res.status(201).json({ data: result })
 }

@@ -21,7 +21,7 @@ function create (name, authors, description, borrowed){
     } else if (borrowed === undefined || typeof borrowed !== 'boolean'){
         return error('true/false value is required')
     
-    } else if (typeof authors !== "array"){
+    } else if (!Array.isArray(authors)){
         return error('author has to be array')
     }
 

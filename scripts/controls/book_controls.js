@@ -4,6 +4,14 @@ function getAll (req, res, next){
     res.status(200).json({ data: model.getAll()})
 }
 
+function getOne (req, res, next){
+    const result = model.getOne(req.params.id)
+    if(result.errors){
+        return next({ status: 400, message: `Could not get a book`, errors: result.errors })
+    }
+    res.status(200).json({ data: result }) 
+}
+
 function create (req, res, next){
     const result = model.create(
         req.body.name,
@@ -41,4 +49,4 @@ function editOne (req, res, next){
     res.status(201).json({ data: result })
 }
 
-module.exports = { getAll, create, deleteOne, editOne }
+module.exports = { getAll, getOne, create, deleteOne, editOne }

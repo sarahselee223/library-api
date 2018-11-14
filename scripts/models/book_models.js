@@ -9,6 +9,17 @@ function getAll(){
     return books
 }
 
+function getOne(id){
+    const { books } = readData() 
+   
+    const book = books.find(book => {return book.id === id})
+    
+    if (!book) {
+        return error('no matching id found')
+    } 
+    return book
+}
+
 function create (name, authors, description, borrowed){
     const { books } = readData() 
 
@@ -83,4 +94,4 @@ function writeData(books){
     return fs.writeFileSync(booksFilePath, JSON.stringify(books, null, 4))
 }
 
-module.exports = { getAll, create, deleteOne, editOne }
+module.exports = { getAll, getOne, create, deleteOne, editOne }
